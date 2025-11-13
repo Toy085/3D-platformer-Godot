@@ -1,0 +1,16 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+
+# Build outputs (optional, if you export builds here)
+build/
+bin/

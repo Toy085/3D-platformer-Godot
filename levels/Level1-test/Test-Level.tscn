@@ -1,0 +1,130 @@
+[gd_scene load_steps=15 format=3 uid="uid://d0nbxvr2nlnig"]
+
+[ext_resource type="Shader" uid="uid://cdlt3ujrpad32" path="res://levels/level/sky_with_stars.tres" id="1_6f01f"]
+[ext_resource type="Texture2D" uid="uid://ca3jtautvrj1u" path="res://levels/level/moon.png" id="2_oi5d7"]
+[ext_resource type="PackedScene" uid="uid://33iafup0jk0v" path="res://kenney_platformer-kit/Models/FBX format/block-grass-large-slope.fbx" id="3_an0ft"]
+[ext_resource type="PackedScene" uid="uid://fpp8qjx34hlu" path="res://kenney_platformer-kit/Models/FBX format/block-grass-low-hexagon.fbx" id="4_itr43"]
+[ext_resource type="PackedScene" uid="uid://gwans13nlehj" path="res://kenney_platformer-kit/Models/FBX format/block-grass-low.fbx" id="5_swpwa"]
+
+[sub_resource type="Curve" id="Curve_1w8nh"]
+_data = [Vector2(0.331719, 0.0391753), 0.0, 0.0, 0, 0, Vector2(0.697336, 1), 0.51276, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_moxc7"]
+curve = SubResource("Curve_1w8nh")
+
+[sub_resource type="Gradient" id="Gradient_an0ft"]
+offsets = PackedFloat32Array(0.784123, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_itr43"]
+frequency = 0.3589
+fractal_octaves = 4
+cellular_distance_function = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_83fre"]
+width = 1024
+height = 1024
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_itr43")
+color_ramp = SubResource("Gradient_an0ft")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swpwa"]
+shader = ExtResource("1_6f01f")
+shader_parameter/top_color = Color(0.288469, 0.182916, 1, 1)
+shader_parameter/bottom_color = Color(1, 0.46805, 0, 1)
+shader_parameter/gradient_curve = SubResource("CurveTexture_moxc7")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_83fre")
+shader_parameter/moon_texture = ExtResource("2_oi5d7")
+shader_parameter/moon_direction = Vector3(-1.095, 0.68, 1)
+shader_parameter/moon_size = 0.045
+
+[sub_resource type="Sky" id="Sky_0h0bb"]
+sky_material = SubResource("ShaderMaterial_swpwa")
+
+[sub_resource type="Environment" id="Environment_nahlu"]
+background_mode = 2
+sky = SubResource("Sky_0h0bb")
+ambient_light_source = 3
+ambient_light_color = Color(0.74902, 0.742654, 0.615273, 1)
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 2
+tonemap_exposure = 1.05
+tonemap_white = 0.95
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 1.4
+glow_intensity = 4.98
+glow_strength = 0.26
+glow_bloom = 0.08
+glow_blend_mode = 0
+glow_hdr_threshold = 0.26
+glow_hdr_scale = 0.0
+glow_hdr_luminance_cap = 18.75
+glow_map_strength = 1.0
+fog_light_color = Color(0.843137, 0.737255, 0.329412, 1)
+fog_density = 0.0
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.0
+fog_height_density = 0.1
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.843137, 0.737255, 0.329412, 1)
+volumetric_fog_emission = Color(0.843137, 0.737255, 0.329412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_an0ft"]
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nahlu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.327016, 0.941731, -0.0787648, 0.688764, 0.294578, 0.662441, 0.647044, 0.162378, -0.744962, -47.2295, 26.8832, -28.0205)
+light_energy = 0.53
+shadow_enabled = true
+directional_shadow_max_distance = 40.0
+
+[node name="block-grass-large-slope" parent="." instance=ExtResource("3_an0ft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -8.6)
+
+[node name="block-grass-low-hexagon" parent="." instance=ExtResource("4_itr43")]
+
+[node name="block-grass-low-hexagon2" parent="." instance=ExtResource("4_itr43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000001, 0, -1.7)
+
+[node name="block-grass-low-hexagon3" parent="." instance=ExtResource("4_itr43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29999995, 0, -3.4)
+
+[node name="block-grass-low-hexagon4" parent="." instance=ExtResource("4_itr43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4000001, 0, -5.7)
+
+[node name="block-grass-low" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, -10.1)
+
+[node name="block-grass-low2" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999999, 0.3, -12.3)
+
+[node name="block-grass-low3" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.3, -14.6)
+
+[node name="block-grass-low4" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9000001, 0.3, -15.700001)
+
+[node name="block-grass-low5" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0000002, 0.3, -14.200001)
+
+[node name="block-grass-low6" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0.3, -15.500001)
+
+[node name="block-grass-low7" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6000004, 0.3, -17.400002)
+
+[node name="block-grass-low8" parent="." instance=ExtResource("5_swpwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4000006, 0.3, -14.300001)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("BoxMesh_an0ft")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MeshInstance3D"]

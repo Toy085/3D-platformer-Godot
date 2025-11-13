@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjo8bxbyc4w5t"
+path="res://.godot/imported/block-snow-corner-low.obj-645066438905c2c3221df4a06a22d41a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/block-snow-corner-low.obj-645066438905c2c3221df4a06a22d41a.mesh"]
+
+source_file="res://kenney_platformer-kit/Models/OBJ format/block-snow-corner-low.obj"
+dest_files=["res://.godot/imported/block-snow-corner-low.obj-645066438905c2c3221df4a06a22d41a.mesh", "res://.godot/imported/block-snow-corner-low.obj-645066438905c2c3221df4a06a22d41a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
